@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>版本更新</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+
+
+    <![endif]-->
+    <!--<script src="js/jquery.js"></script>-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container" style="background: url('img/bg_login.png') no-repeat">
+    <form id="tf" class="form-horizontal container" enctype="multipart/form-data">
+        <div class="container" style="padding: 10%">
+            <div id="legend" class="text-center">
+                <legend class="">提交版本更新信息</legend>
+            </div>
+            <div class="control-group text-center" style="margin-top: 5%">
+
+                <!-- Text input-->
+                <label class="control-label">版本号</label>
+                <div class="controls">
+                    <input type="text" name="version_code">
+                </div>
+            </div>
+            <div class="control-group text-center">
+
+                <!-- Text input-->
+                <label class="control-label">版本名称</label>
+                <div class="controls">
+                    <input type="text" name="version_name">
+                </div>
+            </div>
+
+            <div class="control-group text-center">
+
+                <!-- Text input-->
+                <label class="control-label">版本信息</label>
+                <div class="controls">
+                    <input type="text" name="version_message">
+                </div>
+            </div>
+
+
+
+            <div class="control-group text-center">
+                <label class="control-label">安装包名称</label>
+                <div class="controls">
+                    <input type="text" name="version_url">
+                </div>
+            </div>
+            <div class="control-group text-center">
+            <label class="control-label"></label>
+
+            <!-- Button -->
+            <div class="controls">
+                <div class="btn btn-success">Button</div>
+            </div>
+        </div>
+
+        </div>
+    </form>
+</div>
+
+
+<script>
+    $(".btn-success").click(function () {
+        var form = new FormData(document.getElementById("tf"));
+        //form.append("file",$("#fileInput")[0].files[0]);
+//             var req = new XMLHttpRequest();
+//             req.open("post", "${pageContext.request.contextPath}/public/testupload", false);
+//             req.send(form);
+        $.ajax({
+            url:"../Materials_Management_Admin/index.php/Update/update/update",
+            type:"post",
+            data:form,
+            processData:false,
+            contentType:false,
+            success:function(data){
+                if (data.error == 0){
+					alert(data.data);
+                    //$("#tf").empty();
+                }else {
+                    alert(data.errormsg);
+                }
+            },
+        });
+    })
+</script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+
+</body>
+</html>
